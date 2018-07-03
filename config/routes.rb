@@ -3,5 +3,7 @@ Rails.application.routes.draw do
 
   get 'welcome/about'
 
+  get 'welcome/contact.html.erb'
+
   root 'welcome#index'
 end
