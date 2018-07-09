@@ -8,7 +8,7 @@
 require 'random_data'
 
 # Create Posts
-Post.find_or_create_by!(
+p = Post.find_or_create_by!(
   title: "Kevin's Test Title",
   body: "Kevin's Test Body"
 )
@@ -23,7 +23,7 @@ posts = Post.all
 
 # Create Comments
 Comment.find_or_create_by!(
-  post: posts.first,
+  post: p,
   body: "Kevin's Test Comment Body"
   )
 
