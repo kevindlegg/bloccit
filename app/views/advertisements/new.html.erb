@@ -20,7 +20,7 @@
        </div>
         <div class="form-group">
          <%= f.label :price %>
-         <%= f.integer :price, rows: 8, class: 'form-control', placeholder: "Enter advertisement price" %>
+         <%= f.number_field :price, rows: 8, class: 'form-control', placeholder: "Enter advertisement price" %>
        </div>
        <div class="form-group">
          <%= f.submit "Save", class: 'btn btn-success' %>
