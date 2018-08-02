@@ -15,4 +15,10 @@
  */
  @import "bootstrap-sprockets";
  @import "bootstrap";
- @import "sessions.scss"
+ @import "sessions.scss";
+
+.user-info {
+  margin-top: 5px;
+  margin-right: 5px;
+  display: inline-block;
+} 
