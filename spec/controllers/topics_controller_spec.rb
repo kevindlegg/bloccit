@@ -9,7 +9,7 @@ RSpec.describe TopicsController, type: :controller do
     describe "GET index" do
       it "returns http success" do
         get :index
-        expect(response).to have_http_status(:success)
+        expect(response).to be_successful
       end
 
       it "assigns Topic.all to topic" do
@@ -21,7 +21,7 @@ RSpec.describe TopicsController, type: :controller do
     describe "GET show" do
       it "returns http success" do
         get :show, params: { id: my_topic.id }
-        expect(response).to have_http_status(:success)
+        expect(response).to be_successful
       end
 
       it "renders the #show view" do
@@ -83,7 +83,7 @@ RSpec.describe TopicsController, type: :controller do
     describe "GET index" do
       it "returns http success" do
         get :index
-        expect(response).to have_http_status(:success)
+        expect(response).to be_successful
       end
 
       it "assigns Topic.all to topic" do
@@ -95,7 +95,7 @@ RSpec.describe TopicsController, type: :controller do
     describe "GET show" do
       it "returns http success" do
         get :show, params: { id: my_topic.id }
-        expect(response).to have_http_status(:success)
+        expect(response).to be_successful
       end
 
       it "renders the #show view" do
@@ -157,7 +157,7 @@ RSpec.describe TopicsController, type: :controller do
     describe "GET index" do
       it "returns http success" do
         get :index
-        expect(response).to have_http_status(:success)
+        expect(response).to be_successful
       end
 
       it "assigns Topic.all to topic" do
@@ -169,7 +169,7 @@ RSpec.describe TopicsController, type: :controller do
     describe "GET show" do
       it "returns http success" do
         get :show, params: { id: my_topic.id }
-        expect(response).to have_http_status(:success)
+        expect(response).to be_successful
       end
 
       it "renders the #show view" do
@@ -186,7 +186,7 @@ RSpec.describe TopicsController, type: :controller do
     describe "GET new" do
       it "returns http success" do
         get :new
-        expect(response).to have_http_status(:success)
+        expect(response).to be_successful
       end
 
       it "renders the #new view" do
@@ -219,7 +219,7 @@ RSpec.describe TopicsController, type: :controller do
     describe "GET edit" do
       it "returns http success" do
         get :edit, params: { id: my_topic.id }
-        expect(response).to have_http_status(:success)
+        expect(response).to be_successful
       end
 
       it "renders the #edit view" do

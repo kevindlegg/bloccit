@@ -6,14 +6,14 @@ RSpec.describe SessionsController, type: :controller do
   describe "GET new" do
     it "returns http success" do
       get :new
-      expect(response).to have_http_status(:success)
+      expect(response).to be_successful
     end
   end
 
   describe "POST sessions" do
     it "returns http success" do
       post :create, params: { session: { email: my_user.email } }
-      expect(response).to have_http_status(:success)
+      expect(response).to be_successful
     end
 
     it "initializes a sessions" do
