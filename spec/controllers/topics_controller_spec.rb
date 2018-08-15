@@ -3,7 +3,7 @@ include RandomData
 include SessionsHelper
 
 RSpec.describe TopicsController, type: :controller do
-  let (:my_topic) { Topic.create!(name:  RandomData.random_sentence, description:   RandomData.random_paragraph) }
+  let!(:my_topic) { Topic.create!(name: RandomData.random_sentence, description: RandomData.random_paragraph) }
 
   context "guest" do
     describe "GET index" do
@@ -270,14 +270,18 @@ RSpec.describe TopicsController, type: :controller do
     end
 
     describe "DELETE destroy" do
-      before :each do
-        post = my_topic.posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: current_user)
+      it "deletes the topic" do
+        expect { 
+          delete(:destroy, params: { id: my_topic.id })
+        }.to change(Topic, :count).from(1).to(0)
       end
 
-      it "deletes the topic" do
-        delete :destroy, params: { id: my_topic.id }
-        count = Post.where({id: my_topic.id}).size
-        expect(count).to eq 0
+      it "deletes the associated posts" do
+        my_topic.posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: current_user)
+
+        expect { 
+          delete(:destroy, params: { id: my_topic.id })
+        }.to change(my_topic.posts, :count).from(1).to(0)
       end
 
       it "redirects to topics index" do
@@ -380,14 +384,18 @@ RSpec.describe TopicsController, type: :controller do
     end
 
     describe "DELETE destroy" do
-      before :each do
-        post = my_topic.posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: current_user)
+      it "does not delete the topic" do
+        expect { 
+          delete(:destroy, params: { id: my_topic.id })
+        }.to_not change(Topic, :count)
       end
 
-      it "does not delete the topic" do
-        delete :destroy, params: { id: my_topic.id }
-        count = Post.where({id: my_topic.id}).size
-        expect(count).to eq 1
+      it "does not delete the associated posts" do
+        my_topic.posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: current_user)
+
+        expect { 
+          delete(:destroy, params: { id: my_topic.id })
+        }.to_not change(my_topic.posts, :count)
       end
 
       it "redirects to topics index" do
