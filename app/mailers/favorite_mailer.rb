@@ -1,7 +1,8 @@
 class FavoriteMailer < ApplicationMailer
-  default from: "kevinlegg@legalshieldcorp.com"
+  default from: "kdlmustang@gmail.com"
 
   def new_comment(user, post, comment)
+    
     headers["Message-ID"] = "<comments/#{comment.id}@enigmatic-everglades-92504.herokuapp.com"
     headers["In-Reply-To"] = "<post/#{post.id}@enigmatic-everglades-92504.herokuapp.com"
     headers["References"] = "<post/#{post.id}@enigmatic-everglades-92504.herokuapp.com"
@@ -9,6 +10,8 @@ class FavoriteMailer < ApplicationMailer
     @user = user
     @post = post
     @comment = comment
+
+    puts "Sending mail to " + user.email + "..."
 
     mail(to: user.email, subject: "New comment on #{post.title}")
   end
