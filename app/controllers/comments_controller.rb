@@ -2,7 +2,9 @@ class CommentsController < ApplicationController
   before_action :require_sign_in
   before_action :authorize_user, only: [:destroy]
 
-  def create 
+  def create
+    puts "SENDGRID_USERNAME: #{ENV['SENDGRID_USERNAME']}"
+    puts "SENDGRID_PASSWORD: #{ENV['SENDGRID_PASSWORD']}"
     @post = Post.find(params[:post_id])
     comment = @post.comments.new(comment_params)
     comment.user = current_user

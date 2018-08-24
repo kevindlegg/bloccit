@@ -11,8 +11,6 @@ class FavoriteMailer < ApplicationMailer
     @post = post
     @comment = comment
 
-    puts "Sending mail to " + user.email + "..."
-
     mail(to: user.email, subject: "New comment on #{post.title}")
   end
 end
