@@ -1,6 +1,4 @@
 if Rails.env.development? || Rails.env.production?
-  puts "SENDGRID_USERNAME: #{ENV['SENDGRID_USERNAME']}"
-  puts "SENDGRID_PASSWORD: #{ENV['SENDGRID_PASSWORD']}"
   ActionMailer::Base.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
     address:        'smtp.sendgrid.net',
