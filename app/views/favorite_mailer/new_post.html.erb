@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1>New post "<%= @post.title %>" created.</h1>
+    <small>
+      By: <%= @post.user.name %>
+    </small>
+    <p>
+      <%= @post.body %>
+    </p>
+    <p>
+      Post is automatically favorited and you will receive notification of any comments made for this post.
+    <p>
+      <%= link_to "View Post on site", topic_post_url(@post.topic, @post, anchor: "post-#{@post.id}") %>
+    </p>
+  </body>
+</html>

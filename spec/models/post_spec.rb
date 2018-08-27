@@ -32,6 +32,12 @@ RSpec.describe Post, type: :model do
     end
   end
 
+  describe "#after_create" do
+    it "favorites post" do
+      expect(post.favorites.count).to eq(1)
+    end
+  end
+
   describe "voting" do
     before do
       3.times { post.votes.create!(value: 1, user: user) }
