@@ -1,0 +1,18 @@
+<% avatar_url = post.user.avatar_url(128) %>
+<% if avatar_url %>
+  <div class="media-left">
+    <%= image_tag avatar_url, class: 'media-object', width:'50px' %>
+  </div>
+<% end %>
+<div class="media-right">
+  <div class="media">
+    <div class="media-body">
+      <h4 class="media-heading">
+        <%= link_to post.title, topic_post_path(post.topic, post) %>
+      </h4>
+      <small>
+        <%= post.comments.count %> Comments <%= post.points %> Votes
+      </small>
+    </div>
+  </div>
+</div>

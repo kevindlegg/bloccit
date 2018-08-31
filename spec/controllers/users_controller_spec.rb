@@ -1,15 +1,17 @@
 require 'rails_helper'
+include SessionsHelper
 
 RSpec.describe UsersController, type: :controller do
+  render_views
   let(:new_user_attributes) do
     {
       name: "BlocHead",
       email: "blochead@bloc.io",
       password: "blochead",
-      password_confirmation: "blochead"               
+      password_confirmation: "blochead"
     }
   end
-  
+
   describe "GET new" do
     it "returns http success" do
       get :new
@@ -30,7 +32,7 @@ RSpec.describe UsersController, type: :controller do
 
     it "creates a new user" do
       expect{
-        post :create, params: { user: new_user_attributes }        
+        post :create, params: { user: new_user_attributes }
       }.to change(User, :count).by(1)
     end
 
@@ -57,6 +59,37 @@ RSpec.describe UsersController, type: :controller do
     it "logs the user in after sign up" do
       post :create, params: { user: new_user_attributes }
       expect(session[:user_id]).to eq assigns(:user).id
+    end
+  end
+
+  describe "shows user information when signed in" do
+    let(:my_topic) { create(:topic) }
+    let(:my_user) { create(:user, new_user_attributes) }
+    let(:my_post) { create(:post, topic: my_topic, user: my_user) }
+    let(:my_comment) { create(:comment, post: my_post, user: my_user) }
+    let(:my_favorite) { Favorite.create!(post: my_post, user: my_user) }
+
+    it "returns http success" do
+      get :show, params: { id: my_user.id }
+      expect(response).to be_successful
+    end
+
+    it "shows _post partial" do
+      post = my_post
+      get :show, params: { id: my_user.id }
+      expect(response).to render_template(partial: '_post')
+    end
+
+    it "shows _comment partial" do
+      comment = my_comment
+      get :show, params: { id: my_user.id }
+      expect(response).to render_template(partial: '_comment')
+    end
+
+    it "shows _favorite partial" do
+      favorite = my_favorite
+      get :show, params: { id: my_user.id }
+      expect(response).to render_template(partial: 'users/_favorite')
     end
   end
 
